@@ -3,6 +3,13 @@ from turtle import *
 
 from freegames import square, vector
 
+# Definir una lista de colores excluyendo el rojo
+colors = ['blue', 'green', 'purple', 'orange', 'yellow']
+
+# Seleccionar colores al azar para la víbora y la comida, asegurando que sean diferentes
+snake_color = choice(colors)
+food_color = choice([color for color in colors if color != snake_color])
+
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
@@ -83,10 +90,12 @@ def move():
     draw_border()
     move_food()
 
+    # Dibujar la serpiente con el color seleccionado aleatoriamente
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, snake_color)
 
-    square(food.x, food.y, 9, 'green')
+    # Dibujar la comida con un color diferente al de la serpiente
+    square(food.x, food.y, 9, food_color)
     update()
     ontimer(move, 100)
 
